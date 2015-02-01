@@ -1,0 +1,54 @@
+<div ng-controller="InboxController">
+
+    <ion-header-bar class="bar bar-stable">
+        <button class="button button-icon" ng-click="toggleLeft()">
+            <i class="icon ion-navicon-round"></i>
+        </button>
+        <h1 class="title">Inbox</h1>
+    </ion-header-bar>
+    <ion-content ng-controller="InboxSummaryController">
+        <div class="sk-spinner sk-spinner-wave" ng-show="loadingSummary">
+            <div class="sk-rect1"></div>
+            <div class="sk-rect2"></div>
+            <div class="sk-rect3"></div>
+            <div class="sk-rect4"></div>
+            <div class="sk-rect5"></div>
+        </div>
+        <div class="list" ng-hide="loadingSummary">
+
+            <a class="item item-avatar"
+               ng-repeat="detail in messagesSummary|sortByDate"
+               ng-href="#/inbox/{{detail.Contact.username}}" ng-show="detail.Contact.username">
+                <img ng-src="{{detail.Contact.profilephoto_thumb}}">
+
+                <h2>{{detail.Contact.firstname +' '+detail.Contact.lastname}}</h2>
+
+                <p>{{detail.Message.message}}</p>
+            </a>
+
+        </div>
+    </ion-content>
+</div>
+<!--
+
+<div class="row container-fluid">
+<div class="col-lg-2">
+
+</div>
+<div class="col-lg-8 panel" ng-controller="InboxController">
+<h1 class="my-font center-text darkgreen">Messages</h1>
+
+<div>
+    <div ng-controller="InboxMenuController">
+        <ng-include src="'./views/connections/menu.html'"></ng-include>
+    </div>
+    <div>
+
+        <div ng-include="data.view"></div>
+    </div>
+</div>
+</div>
+<div class="col-lg-2">
+
+</div>
+</div>-->

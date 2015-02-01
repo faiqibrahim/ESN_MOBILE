@@ -1,0 +1,69 @@
+<div ng-controller="ConnectionsController">
+    <ion-header-bar class="bar bar-stable">
+        <button class="button button-icon" ng-click="toggleLeft()">
+            <i class="icon ion-navicon-round"></i>
+        </button>
+        <h1 class="title">Connections</h1>
+    </ion-header-bar>
+    <ion-content>
+        <div class="list">
+
+            <div class="item item-divider">
+                Connections to you
+            </div>
+            <div ng-controller="ConnectionsToUserController">
+                <div class="list">
+
+                    <a class="item item-avatar" dir-paginate="user in users|itemsPerPage:50"
+                       ng-href="#/profile/{{user.User.username}}">
+                        <img ng-src="{{user.User.profilephoto_thumb}}">
+
+                        <h2>{{(user.User.firstname+' '+user.User.lastname).substr(0,14)}}</h2>
+                    </a>
+                </div>
+            </div>
+
+            <div class="item item-divider">
+                Connections from you
+            </div>
+
+            <div ng-controller="ConnectionsFromUserController">
+                <div class="list">
+
+                    <a class="item item-avatar" dir-paginate="user in users|itemsPerPage:50"
+                       ng-href="#/profile/{{user.User.username}}">
+                        <img ng-src="{{user.User.profilephoto_thumb}}">
+
+                        <h2>{{(user.User.firstname+' '+user.User.lastname).substr(0,14)}}</h2>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </ion-content>
+
+</div>
+
+<!--
+<div class="row container-fluid">
+    <div class="col-lg-2">
+    <user-suggestions></user-suggestions>
+    </div>
+    <div class="col-lg-8 panel" ng-controller="ConnectionsController">
+        <h1 class="my-font center-text darkgreen">Connections</h1>
+
+        <div>
+            <div ng-controller="ConnectionsMenuController">
+                <ng-include src="'./views/connections/menu.html'"></ng-include>
+            </div>
+            <div>
+
+                <div ng-include="data.view"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2">
+    <group-suggestions></group-suggestions>
+    </div>
+</div>
+-->

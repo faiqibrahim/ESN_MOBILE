@@ -1,0 +1,39 @@
+<style>
+
+</style>
+<div class="row panel">
+    <div class="col-lg-2">
+
+    </div>
+    <div class="col-lg-8" ng-controller="EditGroupController">
+        <h2 class="my-font">Edit Group</h2>
+
+        <form role="form" name="createGroup" novalidate>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" placeholder="Enter Title" ng-model="form.title"
+                       required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" ng-model="form.description" required
+                          placeholder="Describe your group"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="privacy">Privacy:</label>
+                <select class="form-control" id="privacy" ng-model="form.privacy" required>
+                    <option value="1">
+                        Public
+                    </option>
+                    <option value="2">
+                        Private
+                    </option>
+                </select>
+            </div>
+            <a class="btn btn-primary" ng-disabled="createGroup.$invalid" ng-click="edit_group();">Update</a>
+        </form>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>

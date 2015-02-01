@@ -1,0 +1,58 @@
+<style>
+    .user-info {
+        position: relative;
+        overflow: auto;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .user-info > img {
+        position: relative;
+        float: left;
+        width: 50px;
+    }
+
+    .user-info > h2 {
+        position: relative;
+        float: left;
+        margin-left: 5px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .scroll {
+        max-height: 350px;
+        overflow-x: hidden;
+        overflow-y: visible;
+    }
+</style>
+<div class="row custom-scroll-bar scroll">
+    <div class="my-font center-text padding-10 well">
+        <h4 class="color-green">Users suggested</h4>
+    </div>
+    <div ng-hide="user_suggestionsLoading">
+        <div class="user-info panel panel-body col-md-12 padding-10 center" ng-repeat="user in user_suggestions">
+            <img class="img-circle" ng-src="{{user.User.profilephoto_thumb}}"/>
+
+            <h2 class="timesnewroman">
+                <a ng-href="#/profile/{{user.User.username}}">
+                    {{(user.User.firstname+" "+user.User.lastname).substr(0,15)}}
+                </a>
+            </h2>
+        </div>
+        <div ng-show="user_suggestions.length==0" class="col-sm-12 my-font padding-10 color-red center-text">
+            Please add interests in profile
+        </div>
+    </div>
+    <div class="col-sm-12" ng-show="user_suggestionsLoading">
+        <div class="sk-spinner sk-spinner-wave">
+            <div class="sk-rect1"></div>
+            <div class="sk-rect2"></div>
+            <div class="sk-rect3"></div>
+            <div class="sk-rect4"></div>
+            <div class="sk-rect5"></div>
+        </div>
+    </div>
+
+
+</div>

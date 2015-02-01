@@ -1,0 +1,51 @@
+<style>
+    .profile-menu {
+        overflow: auto;
+        background-color: #f5f5f5;
+        border-radius: 5px;
+        padding-top: 5px;
+    }
+
+    .profile-menu > ul {
+        text-align: center;
+        position: relative;
+        padding: 0px;
+    }
+
+    .profile-menu > ul > li {
+        display: inline;
+        padding: 1px;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+
+    .profile-menu > ul > li > a {
+        color: green;
+
+    }
+</style>
+<ion-header-bar class="bar-dark">
+    <h1 class="title">Profile Menu</h1>
+</ion-header-bar>
+<ion-content ng-controller="profileMenuCtrl">
+    <ion-list>
+        <a class="item item-icon-left" ng-click="selectMenu($index)"
+           ng-repeat="menu in data.menus">
+            <i class="icon"></i>
+            {{menu}}
+        </a>
+
+    </ion-list>
+</ion-content>
+<!--
+<div class="profile-menu my-font darkgreen">
+<ul>
+<li ng-repeat="menu in data.menus">
+    <a class="btn" ng-class="getActiveClass(menu)" ng-click="selectMenu($index)">
+        {{menu}}
+    </a>
+</li>
+
+</ul>
+</div>
+-->

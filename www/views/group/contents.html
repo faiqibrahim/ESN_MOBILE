@@ -1,0 +1,130 @@
+<style>
+    .file-upload {
+        overflow: hidden;
+    / / width : 40 px;
+        position: relative;
+        float: left;
+    }
+
+    .file-upload > input {
+        display: none;
+
+    }
+</style>
+<div ng-controller="GroupContentsController" ng-show="groupOwner || groupJoined">
+    <div class="well center margin-5px" ng-show="groupOwner">
+        <div class="my-font darkgreen center-text center">Upload Content</div>
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" ng-model="new_title" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label>
+                Description
+            </label>
+            <textarea class="form-control" id="sharebox_text" placeholder="Share Something..."
+                      ng-model="new_description"></textarea>
+        </div>
+
+        <div class="form-group">
+            <div class="file-upload">
+                <label for="file-input">
+                    <span class="glyphicon glyphicon-file clickable form-control" aria-hidden="true"></span>
+                </label>
+                <input id="file-input" type="file" file-model="contentFile" multiple/>
+                <label>{{fileStatus}}</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <a class="btn btn-success" ng-click="addContent()" ng-disabled="!$fileStatus.isUploaded">Upload</a>
+        </div>
+
+    </div>
+    <div class="card" dir-paginate="content in contents|itemsPerPage:5" ng-hide="contentLoading">
+        <div class="item item-text-wrap">
+            <div>
+                <h1 class="my-font">
+                    {{content.Groupcontent.title}}
+                    <a class="button button-icon"
+                       ng-click="deleteContent(content.Groupcontent.id,$index)"
+                       ng-show="groupOwner">
+                        <i class="icon ion-close color-red"></i>
+                    </a>
+                </h1>
+
+                <span><a ng-href="{{content.Content.content}}">Download</a></span>
+
+                <p>{{content.Groupcontent.description}}</p>
+            </div>
+
+
+        </div>
+        <dir-pagination-controls></dir-pagination-controls>
+    </div>
+    <div class="sk-spinner sk-spinner-wave" ng-show="contentLoading">
+        <div class="sk-rect1"></div>
+        <div class="sk-rect2"></div>
+        <div class="sk-rect3"></div>
+        <div class="sk-rect4"></div>
+        <div class="sk-rect5"></div>
+    </div>
+
+</div>
+<!--
+<div ng-controller="GroupContentsController" ng-show="groupOwner || groupJoined">
+    <div class="well center margin-5px" ng-show="groupOwner">
+        <div class="my-font darkgreen center-text center">Upload Content</div>
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" ng-model="new_title" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label>
+                Description
+            </label>
+            <textarea class="form-control" id="sharebox_text" placeholder="Share Something..."
+                      ng-model="new_description"></textarea>
+        </div>
+
+        <div class="form-group">
+            <div class="file-upload">
+                <label for="file-input">
+                    <span class="glyphicon glyphicon-file clickable form-control" aria-hidden="true"></span>
+                </label>
+                <input id="file-input" type="file" file-model="contentFile" multiple/>
+                <label>{{fileStatus}}</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <a class="btn btn-success" ng-click="addContent()" ng-disabled="!$fileStatus.isUploaded">Upload</a>
+        </div>
+
+    </div>
+    <div class="row margin-5px" ng-hide="contentLoading">
+        <div dir-paginate="content in contents|itemsPerPage:5" class="box-shadow-green margin-5px padding-10">
+            <div>
+                <h1 class="my-font">{{content.Groupcontent.title}}<a class="btn"
+                                                                     ng-click="deleteContent(content.Groupcontent.id,$index)"
+                                                                     ng-show="groupOwner">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </a></h1>
+
+                <span><a ng-href="{{content.Content.content}}">Download</a></span>
+
+                <p class="lead timesnewroman font-size-12 content-space">{{content.Groupcontent.description}}</p>
+                <span class="small">{{content.Groupcontent.modified}}</span>
+            </div>
+
+
+        </div>
+        <dir-pagination-controls></dir-pagination-controls>
+    </div>
+    <div class="sk-spinner sk-spinner-wave" ng-show="contentLoading">
+        <div class="sk-rect1"></div>
+        <div class="sk-rect2"></div>
+        <div class="sk-rect3"></div>
+        <div class="sk-rect4"></div>
+        <div class="sk-rect5"></div>
+    </div>
+
+</div>

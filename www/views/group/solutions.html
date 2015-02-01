@@ -1,0 +1,17 @@
+<style>
+
+</style>
+<div ng-controller="GroupSolutionsController" ng-show="groupOwner">
+    <h1 class="my-font center-text">{{task_title}}</h1>
+
+    <div ng-repeat="solution in task_solutions" class="card">
+        <div class="item item-wrap-text">
+            <h2 class="timesnewroman">Solution By:<span class="small">{{solution.User.firstname+" "+solution.User.lastname}}</span>
+            </h2>
+
+            <p class="">{{solution.Solution.solution}}</p>
+            <a ng-href="{{solution.Content.content}}" ng-show="solution.Content.content">Download Attached File</a>
+        </div>
+
+    </div>
+</div>

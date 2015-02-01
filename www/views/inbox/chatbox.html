@@ -1,0 +1,146 @@
+<style>
+    .header {
+        overflow: hidden;
+        background-color: #f5f5f5;
+        border-radius: 5px;
+        padding-top: 5px;
+    }
+
+    .scroll {
+        overflow-x: hidden;
+        overflow-y: visible;
+    }
+
+    .test {
+        height: 400px;
+        max-height: 400px;
+    }
+</style>
+<div ng-controller="ChatBoxController">
+
+    <ion-header-bar class="bar bar-stable">
+        <button class="button button-icon" ng-click="toggleLeft()">
+            <i class="icon ion-navicon-round"></i>
+        </button>
+        <h1 class="title"> {{contact.firstname+" "+contact.lastname}}</h1>
+    </ion-header-bar>
+    <ion-content>
+        <div class="sk-spinner sk-spinner-wave" ng-show="loadingMessages">
+            <div class="sk-rect1"></div>
+            <div class="sk-rect2"></div>
+            <div class="sk-rect3"></div>
+            <div class="sk-rect4"></div>
+            <div class="sk-rect5"></div>
+        </div>
+        <div class="list" ng-hide="loadingMessages">
+            <button class="button button-full button-clear button-positive" ng-click="loadPrevious()">
+                Load Previous Messages
+            </button>
+            <a class="item item-avatar item-icon-right"
+               ng-repeat="chat in chat.Message|custom">
+                <img ng-src="{{getUser(chat.user_id).profilephoto_thumb}}">
+
+                <h2> {{getUser(chat.user_id).firstname +' '+ getUser(chat.user_id).lastname}}</h2>
+
+                <p>{{chat.message}}</p>
+                <i class="icon ion-close color-red" ng-click="deleteMessage(chat.id,$index)"></i>
+            </a>
+
+            <div class="item item-input-inset">
+                <label class="item-input-wrapper">
+                    <input type="text" placeholder="Message..." ng-model="new_message">
+                </label>
+                <button class="button button-positive button-small" ng-click="sendMessage(new_message)">
+                    <div ng-hide="sendingMessage">Send</div>
+                    <div class="sk-spinner sk-spinner-wave" ng-show="sendingMessage">
+                        <div class="sk-rect1"></div>
+                        <div class="sk-rect2"></div>
+                        <div class="sk-rect3"></div>
+                        <div class="sk-rect4"></div>
+                        <div class="sk-rect5"></div>
+                    </div>
+                </button>
+
+            </div>
+
+        </div>
+    </ion-content>
+</div>
+<!--
+<div ng-controller="ChatBoxController">
+
+<div class="row">
+<div class="col-md-2"></div>
+<div class="col-md-8">
+    <div class="sk-spinner sk-spinner-wave" ng-show="loadingMessages">
+        <div class="sk-rect1"></div>
+        <div class="sk-rect2"></div>
+        <div class="sk-rect3"></div>
+        <div class="sk-rect4"></div>
+        <div class="sk-rect5"></div>
+    </div>
+    <div ng-hide="loadingMessages">
+        <h2 class="header my-font center-text padding-10 darkgreen">
+            {{contact.firstname+" "+contact.lastname}}
+        </h2>
+
+        <div class="test scroll custom-scroll-bar padding-right-10px" id="my-scroll">
+            <div class="center center-text"><a ng-click="loadPrevious()" class="clickable">Load Previous
+                Messages</a></div>
+            <div ng-repeat="chat in chat.Message|custom" class="col-md-12 panel">
+
+                <div class="col-md-3 row padding-top-10px">
+                    <div class="col-md-4 margin-0">
+                        <img class="img-responsive img-rounded"
+                             ng-src="{{getUser(chat.user_id).profilephoto_thumb}}"/>
+                    </div>
+                    <div class="col-md-8 margin-0">
+                        <h2 class="timesnewroman font-size-12">
+                            <a ng-href="#/profile/{{getUser(chat.user_id).username}}">
+                                {{getUser(chat.user_id).firstname +' '+ getUser(chat.user_id).lastname}}
+                            </a>
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-md-7 padding-top-20px timesnewroman no-decoration message-text">
+                    <p class="font-size-16">{{chat.message}}</p>
+                    <span class="small pull-left color-lightgrey">{{chat.created}}</span>
+
+                </div>
+                <div class="col-md-2">
+                    <a class="btn"
+                       ng-click="deleteMessage(chat.id,$index)">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="form-horizontal">
+            <div class="col-md-offset-2 col-md-6">
+                <div class="form-group">
+                    <textarea class="form-control" ng-model="new_message"></textarea>
+                </div>
+            </div>
+            <div class=" col-md-1 padding-top-10px">
+                <div class="form-group" ng-hide="sendingMessage">
+                    <a class="form-control btn btn-primary" ng-disabled="!new_message || sendingMessage"
+                       ng-click="sendMessage()">Send</a>
+                </div>
+                <div class="sk-spinner sk-spinner-wave" ng-show="sendingMessage">
+                    <div class="sk-rect1"></div>
+                    <div class="sk-rect2"></div>
+                    <div class="sk-rect3"></div>
+                    <div class="sk-rect4"></div>
+                    <div class="sk-rect5"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-2"></div>
+
+
+</div>
+</div>-->

@@ -1,0 +1,132 @@
+<style>
+
+    .profile-cover > img {
+        width: 900px;
+        height: 300px;
+    }
+
+    .profile-data > img {
+        position: relative;
+        float: left;
+        margin-top: -70px;
+        margin-left: 20px;
+    }
+
+    .profile-data > h1 {
+        position: relative float : left;
+        clear: right;
+        font-family: "NovecentowideBookBold", Georgia, "Times New Roman", Times, serif;
+        padding: 10px;
+        overflow: auto;
+    }
+
+    .profile-photo-upload > input {
+        display: none;
+
+    }
+
+    .cover-photo-upload > input {
+        display: none;
+
+    }
+</style>
+<div ng-controller="GroupController">
+
+    <ion-header-bar class="bar bar-stable">
+        <button class="button button-icon" ng-click="toggleLeft()">
+            <i class="icon ion-navicon-round"></i>
+        </button>
+        <h1 class="title">{{Group.title}}</h1>
+        <a class="button button-icon" ng-show="groupOwner" ng-href="#/edit-group/{{Group.id}}">
+            <i class="icon ion-edit color-blue"></i>
+        </a>
+        <a class="button button-icon"
+           ng-hide="groupOwner || groupJoined || groupRequested"
+           ng-click="joinGroup()">
+            <i class="icon ion-log-in color-blue"></i>
+        </a>
+        <a class="button button-icon" ng-show="groupJoined" ng-click="unJoinGroup()">
+            <i class="icon ion-log-out color-red"></i>
+        </a>
+        <a class="button button-icon" ng-show="groupRequested" ng-click="cancelRequest()">
+            <i class="icon ion-backspace-outline"></i>
+        </a>
+        <button class="button button-icon" ng-click="toggleRight()">
+            <i class="icon ion-navicon-round"></i>
+        </button>
+    </ion-header-bar>
+
+    <ion-content>
+        <div ng-include="data.view"></div>
+    </ion-content>
+</div>
+<!--
+<div class="row container-fluid">
+<div class="col-lg-2">
+
+</div>
+<div class="col-lg-8 panel" ng-controller="GroupController">
+<div ng-hide="authInfoLoading">
+    <h1 class="my-font center-text darkgreen">
+        {{Group.title}}
+        <a class="btn" ng-show="groupOwner" ng-href="#/edit-group/{{Group.id}}">
+            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+        </a>
+    </h1>
+
+    <p class="lead my-font font-size-12 center-text">{{Group.description}}
+        <span>
+            <a class="btn btn-sm btn-primary"
+               ng-hide="groupOwner || groupJoined || groupRequested"
+               ng-click="joinGroup()">
+                Join Group
+            </a>
+        </span>
+        <span>
+            <a class="btn btn-sm btn-danger" ng-show="groupJoined" ng-click="unJoinGroup()">
+                UnJoin Group
+            </a>
+        </span>
+        <span>
+            <a class="btn btn-sm btn-warning" ng-show="groupRequested" ng-click="cancelRequest()">
+                Cancel Join Request
+            </a>
+        </span>
+        <span>
+            <a class="btn btn-sm btn-success" ng-show="groupOwner" ng-click="seeRequests()">
+                View Join Requests
+            </a>
+        </span>
+    </p>
+
+    <div class="sk-spinner sk-spinner-wave" ng-show="joiningGroup">
+        <div class="sk-rect1"></div>
+        <div class="sk-rect2"></div>
+        <div class="sk-rect3"></div>
+        <div class="sk-rect4"></div>
+        <div class="sk-rect5"></div>
+    </div>
+</div>
+<div ng-hide="groupLoading || groupNotJoined">
+    <div>
+        <div ng-controller="GroupMenuController">
+            <ng-include src="'./views/group/groupmenu.html'"></ng-include>
+        </div>
+        <div>
+
+            <div ng-include="data.view"></div>
+        </div>
+    </div>
+</div>
+<div class="sk-spinner sk-spinner-wave" ng-show="groupLoading || authInfoLoading">
+    <div class="sk-rect1"></div>
+    <div class="sk-rect2"></div>
+    <div class="sk-rect3"></div>
+    <div class="sk-rect4"></div>
+    <div class="sk-rect5"></div>
+</div>
+</div>
+<div class="col-lg-2">
+
+</div>
+</div>
